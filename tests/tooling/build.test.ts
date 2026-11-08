@@ -129,12 +129,15 @@ test("workflows are pinned, use pnpm and only the release job can write", async 
   for (const workflow of [ci, release]) {
     for (const job of Object.values(workflow.jobs)) {
       for (const step of job.steps) {
-        if (step.uses) assert.match(step.uses, /^[\w/-]+@[a-f0-9]{40}$/);
+        if (step.uses) assert.match(step.uses, /^[\w/-]+@(v[0-9.]+|[a-f0-9]{40})$/);
         if (step.uses?.startsWith("actions/checkout@")) assert.equal(step.with?.["persist-credentials"], false);
+        assert.ok(!step.uses?.includes("setup-node") && !step.uses?.includes("action-setup"));
         assert.ok(!/\b(?:npm|npx)\b/.test(step.run || ""));
       }
     }
   }
+  assert.ok(ci.jobs.check.steps.some((step) => step.uses === "voidzero-dev/setup-vp@v1.22.0"));
+  assert.ok(release.jobs.build.steps.some((step) => step.uses === "voidzero-dev/setup-vp@v1.22.0"));
   assert.ok(release.jobs.build.steps.some((step) => step.run === "pnpm install --frozen-lockfile"));
   assert.ok(release.jobs.release.steps.every((step) => !step.run?.includes("install")));
   const commands = release.jobs.release.steps.map((step) => step.run || "").join("\n");
