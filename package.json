@@ -1,0 +1,34 @@
+{
+  "name": "mygo-music-mhub-plugin",
+  "version": "0.4.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "pack": "vp pack",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.tools.json",
+    "lint": "vp lint",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "test:plugin": "node --import tsx --test tests/*.test.ts",
+    "test:tooling": "node --import tsx --test tests/tooling/*.test.ts",
+    "test": "pnpm build && pnpm test:plugin && pnpm test:tooling",
+    "package": "tsx scripts/package.ts",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm package",
+    "version:set": "tsx scripts/version.ts"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "fflate": "0.8.3",
+    "tsdown": "0.23.7",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "vite-plus": "1.4.0",
+    "yaml": "2.9.1",
+    "yjs": "13.6.33"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@12.18.0"
+}
