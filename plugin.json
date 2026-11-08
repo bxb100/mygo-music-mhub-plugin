@@ -1,0 +1,23 @@
+{
+  "id": "mhub",
+  "name": "MHub",
+  "version": "0.4.1",
+  "minAppVersion": "0.1.20",
+  "main": "index.js",
+  "playback": "stream",
+  "permissions": {
+    "network": ["music.op.wiki", "music.zr.wiki", "music.apple.com"]
+  },
+  "settings": [
+    {
+      "key": "platform",
+      "label": "Search platform",
+      "help": "applemusic, netease, bilibili, tencent or youtubemusic. Defaults to applemusic."
+    }
+  ],
+  "navigation": [
+    { "builtin": "home" },
+    { "title": "Discover", "page": "discover", "icon": "star" },
+    { "builtin": "stations", "title": "Radio" }
+  ]
+}

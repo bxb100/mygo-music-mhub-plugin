@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "yjs": "^13.6.33"
+  }
+}
